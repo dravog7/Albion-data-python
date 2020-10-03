@@ -1,10 +1,16 @@
 from distutils.core import setup
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
   name = 'albion_data',         # How you named your package folder (MyLib)
   packages = ['albion_data'],   # Chose the same as "name"
   version = '0.1',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'A python wrapper for Albion data Project',   # Give a short description about your library
+  long_description=long_description,
+  long_description_content_type="text/markdown",
   author = 'dravog7',                   # Type in your name
   author_email = 'dravog78@gmail.com',      # Type in your E-Mail
   url = 'https://github.com/dravog7/Albion-data-python',   # Provide either the link to your github or to your website

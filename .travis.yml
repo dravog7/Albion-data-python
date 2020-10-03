@@ -13,4 +13,5 @@ deploy:
     tags: true
     distributions: sdist bdist_wheel
     repo: dravog7/Albion-data-python
+    python: '3.8'
   skip_cleanup: 'true'

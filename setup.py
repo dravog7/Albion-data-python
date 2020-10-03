@@ -5,8 +5,8 @@ setup(
   version = '0.1',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'A python wrapper for Albion data Project',   # Give a short description about your library
-  author = 'YOUR NAME',                   # Type in your name
-  author_email = 'your.email@domain.com',      # Type in your E-Mail
+  author = 'dravog7',                   # Type in your name
+  author_email = 'dravog78@gmail.com',      # Type in your E-Mail
   url = 'https://github.com/dravog7/Albion-data-python',   # Provide either the link to your github or to your website
   keywords = ['Albion', 'api'],   # Keywords that define your package best
   install_requires=[            # I get to this in a second
@@ -15,8 +15,8 @@ setup(
   classifiers=[
     'Development Status :: 3 - Alpha',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
     'Intended Audience :: Developers',      # Define that your audience are developers
-    'Topic :: Software Development',
-    'License :: OSI Approved :: MIT License',   # Again, pick a license
+    'Topic :: API',
+    'License :: MIT License',   # Again, pick a license
     'Programming Language :: Python :: 3',      #Specify which python versions that you want to support
     'Programming Language :: Python :: 3.4',
     'Programming Language :: Python :: 3.5',

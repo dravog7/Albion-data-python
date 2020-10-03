@@ -1,10 +1,7 @@
 language: python
 python:
-- '2.7'
 - '3.4'
 - '3.8'
-install:
-- pip install -q -r requirements.txt .
 deploy:
   provider: pypi
   user: dravog7

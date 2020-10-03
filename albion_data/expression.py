@@ -10,7 +10,7 @@ class Expr:
     func = None
     reqs: Set[Tuple[str]]
 
-    def __init__(self,a,b,func):
+    def __init__(self, a, b, func):
         self.a = a
         self.b = b
         self.func = func
@@ -47,17 +47,23 @@ class Expr:
         else:
             return 0
 
-    def eval(self,data=None):
+    def eval(self, data=None,forced=False):
         if data == None:
             if self.value:
                 return self.value
-            data = self.get_data()
+            #not forced,a.value and b.value not None
+            if (not forced) and \
+                getattr(self.a,"value",True)!=None and \
+                getattr(self.b,"value",True)!=None:
+                    data = None
+            else:
+                data = self.get_data()
         self.value = self.get(data)
         return self.value
     
     def refresh(self):
         self.value = None
-        return self.eval()
+        return self.eval(forced=True)
 
     def __add__(self,other):
         return Expr(self,other,operator.add)

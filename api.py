@@ -1,14 +1,16 @@
 import requests
 from typing import Union,Iterable,Optional
 
+def exclude_keys(data: dict,keys: set):
+    return {x: data[x] for x in data if x not in keys}
+
 def reorder_price(data):
     result = dict()
     for entry in data:
         item = result.setdefault(entry["item_id"],{})
         city = item.setdefault(entry["city"],{})
-        city.setdefault(entry["quality"],entry)
+        city.setdefault(entry["quality"],exclude_keys(entry,{"item_id","city","quality"}))
     return result
-
 
 def get_price(item_ids: Union[str, Iterable[str]],
               locations: Optional[Union[str, Iterable[str]]]=None,

@@ -1,15 +1,17 @@
 language: python
-
 python:
-  - '2.7'
-  - '3.4'
-  - '3.8'
-
+- '2.7'
+- '3.4'
+- '3.8'
 install:
-  - pip install -q -r requirements.txt .
-
-script:
-  - coverage run --source "$(basename "$PWD")" setup.py test
-
-notifications:
-  email: false
+- pip install -q -r requirements.txt .
+deploy:
+  provider: pypi
+  user: dravog7
+  password:
+    secure: P4OVy5inkXoAxjjai1I51NoyBlNNPKIs7QwlqLBjReBxX4yKkc7KNQNtwgQ2RDXHc19y+DokDaVCLtX4VfOXQ6d8GFuMGEI9l9Q+HFmf5EQstLDkvI1fAkhdNZDodbcVZ3iozYvUZfUxR2mMd2pdjF8lKOph2tbGAeKR4rFMgmo1S7vSnYNlz2xBWT3j6FXerHpVeGdsNRsqAQEbrrS7I3TONq8/z59w59Vp76C387P/gUAqDNxSxQa5gbqb7ODojkW3CQXA/iLwzw3dt8Lm+LUzQj329skEdcxedPPmFcYxEJrgTu2bBbhC+8hV1BRI8SuH+he3g3UbYehM5+iNwjIRRN82Tb5jRo8zptg+7kAGDQGv5VogOulouYxTVQcodTYLASxdh4askZwziExgH4E3mavuyrPLJGtc/FTvp19k2xsFWRw37IoU+uzOxFfAxSIjTrcDOU2Okvm6Rz3JYAGbcb7iLlqYa0xkoRqoHYefKSXuORAEVR4YoraOHK7x/upA4jZbrsXbacD+hOn4v50HlU+TrjvS1wtaB5MBkQfu9zQiS0j3BuUA2LTSPfWwbhasBGOJkTvSc/3wzDr3KQ4H4XK0zmRNctns3/jLApJORy8oHg5ipVgcYGdboGvMDDXrRcrVP3z2nI/UmN/nB1uhsca5i5OXqpZORooDdT0=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: dravog7/Albion-data-python
+  skip_cleanup: 'true'

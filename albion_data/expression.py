@@ -111,34 +111,52 @@ class Expr:
         return Expr(self,None,operator.abs)
     
     def __lt__(self,other):
-        return Expr(self,other,operator.lt).eval()
+        return Expr(self,other,operator.lt)
 
     def __le__(self,other):
-        return Expr(self,other,operator.le).eval()
+        return Expr(self,other,operator.le)
 
     def __ne__(self,other):
-        return Expr(self,other,operator.ne).eval()
+        return Expr(self,other,operator.ne)
 
     def __eq__(self,other):
-        return Expr(self,other,operator.eq).eval()
+        return Expr(self,other,operator.eq)
 
     def __gt__(self,other):
-        return Expr(self,other,operator.gt).eval()
+        return Expr(self,other,operator.gt)
 
     def __ge__(self,other):
-        return Expr(self,other,operator.ge).eval()
+        return Expr(self,other,operator.ge)
+    
+    def __and__(self,other):
+        return Expr(self,other,lambda x,y:x and y)
+    
+    def __rand__(self,other):
+        return Expr(other,self,lambda x,y:x and y)
+    
+    def __or__(self,other):
+        return Expr(self,other,lambda x,y:x or y)
+    
+    def __ror__(self,other):
+        return Expr(other,self,lambda x,y:x or y)
 
     def __pos__(self):
         return self
-    
+
     def __repr__(self):
         return str(self.eval())
-    
+
     def __str__(self):
         return str(self.eval())
-    
+
     def __int__(self):
         return self.eval()
+
+    def __bool__(self): #to ensure evaluation in if,while etc
+        return bool(self.eval())
+    
+    def __float__(self):
+        return float(self.eval())
 
 class Var(Expr):
     def __init__(self,item:str,location:str,key:str,quality:Optional[int]=1):

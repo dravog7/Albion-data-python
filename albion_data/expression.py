@@ -15,6 +15,8 @@ class Expr:
         self.b = b
         self.func = func
         self.get_req()
+        if getattr(self.a,"value",True)!=None and getattr(self.b,"value",True)!=None:
+            self.eval()
 
     def get_req(self):
         self.reqs = set()
@@ -51,10 +53,11 @@ class Expr:
         if data == None:
             if self.value:
                 return self.value
-            #not forced,a.value and b.value not None
+            #not forced,a.value and b.value not None and self not a Var
             if (not forced) and \
                 getattr(self.a,"value",True)!=None and \
-                getattr(self.b,"value",True)!=None:
+                getattr(self.b,"value",True)!=None and \
+                (not isinstance(self,Var)):
                     data = None
             else:
                 data = self.get_data()
@@ -108,22 +111,22 @@ class Expr:
         return Expr(self,None,operator.abs)
     
     def __lt__(self,other):
-        return Expr(self,other,operator.lt)
+        return Expr(self,other,operator.lt).eval()
 
     def __le__(self,other):
-        return Expr(self,other,operator.le)
+        return Expr(self,other,operator.le).eval()
 
     def __ne__(self,other):
-        return Expr(self,other,operator.ne)
+        return Expr(self,other,operator.ne).eval()
 
     def __eq__(self,other):
-        return Expr(self,other,operator.eq)
+        return Expr(self,other,operator.eq).eval()
 
     def __gt__(self,other):
-        return Expr(self,other,operator.gt)
+        return Expr(self,other,operator.gt).eval()
 
     def __ge__(self,other):
-        return Expr(self,other,operator.ge)
+        return Expr(self,other,operator.ge).eval()
 
     def __pos__(self):
         return self
@@ -133,6 +136,9 @@ class Expr:
     
     def __str__(self):
         return str(self.eval())
+    
+    def __int__(self):
+        return self.eval()
 
 class Var(Expr):
     def __init__(self,item:str,location:str,key:str,quality:Optional[int]=1):

@@ -73,31 +73,31 @@ class Expr:
 
     def __radd__(self,other):
         return Expr(other,self,operator.add)
-    
+
     def __sub__(self,other):
         return Expr(self,other,operator.sub)
-    
+
     def __rsub__(self,other):
         return Expr(other,self,operator.sub)
 
     def __mul__(self,other):
         return Expr(self,other,operator.mul)
-    
+
     def __rmul__(self,other):
         return Expr(other,self,operator.mul)
 
     def __truediv__(self,other):
         return Expr(self,other,operator.truediv)
-    
+
     def __rtruediv__(self,other):
         return Expr(other,self,operator.truediv)
-    
+
     def __floordiv__(self, other):
         return Expr(self,other,operator.floordiv)
 
     def __rfloordiv__(self, other):
         return Expr(other,self,operator.floordiv)
-    
+
     def __mod__(self, other):
         return Expr(self,other,operator.mod)
     
@@ -127,18 +127,21 @@ class Expr:
 
     def __ge__(self,other):
         return Expr(self,other,operator.ge)
-    
+
     def __and__(self,other):
         return Expr(self,other,lambda x,y:x and y)
-    
+
     def __rand__(self,other):
         return Expr(other,self,lambda x,y:x and y)
-    
+
     def __or__(self,other):
         return Expr(self,other,lambda x,y:x or y)
-    
+
     def __ror__(self,other):
         return Expr(other,self,lambda x,y:x or y)
+
+    def __invert__(self):
+        return Expr(self,None,lambda x: not x)
 
     def __pos__(self):
         return self
@@ -154,7 +157,7 @@ class Expr:
 
     def __bool__(self): #to ensure evaluation in if,while etc
         return bool(self.eval())
-    
+
     def __float__(self):
         return float(self.eval())
 
@@ -170,4 +173,13 @@ class Var(Expr):
         try:
             return data[self.item][self.location][self.quality][self.key]
         except:
-            return None
+            raise InvalidVarError(self)
+
+
+class InvalidVarError(Exception):
+    def __init__(self,var: Var):
+        self.var = var
+        self.message = "invalid params in %s,%s,%d,%s"%(var.item,var.location,var.quality,var.key)
+
+    def __str__(self):
+        return self.message

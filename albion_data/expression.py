@@ -42,16 +42,16 @@ class Expr:
     def get(self,data):
         arg1 = self.a.eval(data) if isinstance(self.a,Expr) else self.a
         arg2 = self.b.eval(data) if isinstance(self.b,Expr) else self.b
-        if arg2:
+        if arg2 != None:
             return self.func(arg1,arg2)
-        elif arg1:
+        elif arg1 != None:
             return self.func(arg1)
         else:
             return 0
 
     def eval(self, data=None,forced=False):
         if data == None:
-            if self.value:
+            if self.value != None:
                 return self.value
             #not forced,a.value and b.value not None and self not a Var
             if (not forced) and \
